@@ -29,7 +29,6 @@
             db = AppDatabase.getInstance(context);
             apiService = ApiClient.getClient().create(ApiService.class);
         }
-        int tamanio;
         public void sincronizarTiendas() {
             apiService.obtenerTiendas().enqueue(new Callback<TiendaDTO>() {
                 @Override

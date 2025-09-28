@@ -3,7 +3,9 @@ package com.example.myapplication.data.network;
 
 import androidx.room.Insert;
 
+import com.example.myapplication.data.dto.LoginDto;
 import com.example.myapplication.data.dto.TiendaDTO;
+import com.example.myapplication.data.dto.UsuarioDTO;
 import com.example.myapplication.data.entities.Tienda;
 
 import java.util.List;
@@ -19,4 +21,8 @@ public interface ApiService {
 
 //    @POST("tiendas")
 //    Call<String> crearTienda(@Body Tienda tienda);
+
+
+    @POST("usuarios/login/movil")
+    Call<UsuarioDTO> login(@Body LoginDto loginDto);
 }
