@@ -1,8 +1,12 @@
 package com.example.myapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,20 +15,22 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import retrofit2.Call;
-
-import com.example.myapplication.adapter.TiendaAdapter;
-import com.example.myapplication.data.entities.Tienda;
-import com.example.myapplication.data.network.ApiClient;
-import com.example.myapplication.data.network.ApiService;
+import com.example.myapplication.data.clases.SessionManager;
+import com.example.myapplication.data.clases.Usuario;
+import com.example.myapplication.data.dto.UsuarioDTO;
+import com.example.myapplication.data.repositories.UsuarioRepository;
 import com.example.myapplication.data.viewmodel.TiendaViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.myapplication.data.viewmodel.UsuarioViewModel;
 
 public class MainActivity extends AppCompatActivity {
-    TiendaViewModel viewModel;
-    ListView lista;
+    Button btnInicio;
+    EditText txtUsuario;
+    EditText txtPassword;
+
+    SessionManager sessionManager;
+
+    UsuarioViewModel viewModel;
+    UsuarioDTO usuarioDTO;
 
 
     @Override
@@ -38,22 +44,57 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.d("TEST", "MainActivity iniciado 🚀");
+        btnInicio = findViewById(R.id.btnInicio);
+        txtUsuario = findViewById(R.id.txtUsuario);
+        txtPassword = findViewById(R.id.txtPassword);
+        usuarioDTO = new UsuarioDTO();
 
-        String _tiendas;
-        lista = findViewById(R.id.lista);
-        TiendaAdapter adapter = new TiendaAdapter(this, new ArrayList<>());
-        lista.setAdapter(adapter);
-
-        viewModel = new ViewModelProvider(this).get(TiendaViewModel.class);
-
+        sessionManager = new SessionManager(this);
+        viewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
 
 
-        viewModel.getTodasTiendas().observe(this, tiendas -> {
-            adapter.listaTiendas = tiendas;
-            adapter.notifyDataSetChanged();
+
+        Log.d("TEST", "MainActivity iniciado");
+
+        btnInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String usuario = txtUsuario.getText().toString().trim();
+                String password = txtPassword.getText().toString().trim();
+
+                if(usuario.isEmpty() || password.isEmpty()){
+                    Toast.makeText(MainActivity.this, "Ingrese su usuario y contraseña", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                viewModel.login(usuario, password).observe(MainActivity.this, user -> {
+                    if (user != null)
+                    {
+                        Toast.makeText(MainActivity.this, "Bienvenido " +user.getNombre(), Toast.LENGTH_SHORT).show();
+                        Log.d("Login", "El usuario ha iniciado sesion: " +sessionManager.getUsuario().getUsename());
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
-        viewModel.sincronizarTiendas();
+
+//        String _tiendas;
+//        lista = findViewById(R.id.lista);
+//        TiendaAdapter adapter = new TiendaAdapter(this, new ArrayList<>());
+//        lista.setAdapter(adapter);
+//
+//        viewModel = new ViewModelProvider(this).get(TiendaViewModel.class);
+//
+//
+//
+//        viewModel.getTodasTiendas().observe(this, tiendas -> {
+//            adapter.listaTiendas = tiendas;
+//            adapter.notifyDataSetChanged();
+//        });
+//
+//        viewModel.sincronizarTiendas();
     }
 }
