@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class TiendasActivity extends BaseActivity {
+public class InicioActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class TiendasActivity extends BaseActivity {
 
         EdgeToEdge.enable(this);
 
-        setupDrawer(R.layout.activity_tiendas);
+        setupDrawer(R.layout.activity_inicio);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

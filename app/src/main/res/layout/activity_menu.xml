@@ -5,15 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TiendasActivity">
+    tools:context=".MenuActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="62dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="292dp"
-        android:layout_marginEnd="156dp"
-        android:text="TIENDAS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
