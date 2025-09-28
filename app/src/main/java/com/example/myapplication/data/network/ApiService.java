@@ -1,0 +1,22 @@
+package com.example.myapplication.data.network;
+
+
+import androidx.room.Insert;
+
+import com.example.myapplication.data.dto.TiendaDTO;
+import com.example.myapplication.data.entities.Tienda;
+
+import java.util.List;
+
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.Call;
+import retrofit2.http.POST;
+
+public interface ApiService {
+    @GET("tiendas")
+    Call<TiendaDTO> obtenerTiendas();
+
+//    @POST("tiendas")
+//    Call<String> crearTienda(@Body Tienda tienda);
+}
