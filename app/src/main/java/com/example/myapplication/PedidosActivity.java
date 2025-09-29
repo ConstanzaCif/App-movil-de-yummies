@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -12,20 +14,23 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.adapter.PedidoAdapter;
+import com.example.myapplication.data.clases.SessionManager;
 import com.example.myapplication.data.viewmodel.PedidoViewModel;
 
 import java.util.ArrayList;
 
-public class PedidosActivity extends AppCompatActivity {
+public class PedidosActivity extends BaseActivity {
     ListView lstViewPedidos;
     PedidoViewModel pedidoViewModel;
+    SessionManager sessionManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_pedidos);
+        setupDrawer(R.layout.activity_pedidos);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -41,7 +46,9 @@ public class PedidosActivity extends AppCompatActivity {
             pedidoAdapter.listaPedidos = pedidos;
             pedidoAdapter.notifyDataSetChanged();
         });
+        sessionManager = new SessionManager(this);
 
+        Log.d("Usuario", "logueado "+sessionManager.getUsuario().getId_usuarios());
         pedidoViewModel.sincronizarPedidos(usuario);
 
 

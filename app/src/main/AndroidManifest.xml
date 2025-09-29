@@ -26,6 +26,8 @@
         <activity
             android:name=".TiendasActivity"
             android:exported="false" />
+        <activity android:name=".PedidosActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yummies_red">#D32F2F</color>
+    <color name="yummies_light_red">#FF5722</color>
+    <color name="yummies_blue">#1976D2</color>
+    <color name="yummies_light_blue">#42A5F5</color>
+    <color name="yummies_white">#FFFFFF</color>
+    <color name="yummies_divider">#FFCDD2</color>
 </resources>
