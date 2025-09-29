@@ -20,6 +20,7 @@ import com.example.myapplication.data.clases.SessionManager;
 import com.example.myapplication.data.clases.Usuario;
 import com.example.myapplication.data.dto.UsuarioDTO;
 import com.example.myapplication.data.repositories.UsuarioRepository;
+import com.example.myapplication.data.viewmodel.PedidoViewModel;
 import com.example.myapplication.data.viewmodel.TiendaViewModel;
 import com.example.myapplication.data.viewmodel.UsuarioViewModel;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     UsuarioDTO usuarioDTO;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +47,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        PedidoViewModel pedidoViewModel = new ViewModelProvider(this).get(PedidoViewModel.class);
+        pedidoViewModel.enviarPendientes();
 
         btnInicio = findViewById(R.id.btnInicio);
         txtUsuario = findViewById(R.id.txtUsuario);
         txtPassword = findViewById(R.id.txtPassword);
         usuarioDTO = new UsuarioDTO();
+
 
         sessionManager = new SessionManager(this);
 

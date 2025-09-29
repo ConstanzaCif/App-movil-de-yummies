@@ -74,6 +74,8 @@ public class CrearPedidoActivity extends AppCompatActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_pedido);
 
+
+
         // --- Inicializar views ---
         spinnerTienda = findViewById(R.id.spinnerTienda);
         spinnerProducto = findViewById(R.id.spinnerProducto);
@@ -88,6 +90,7 @@ public class CrearPedidoActivity extends AppCompatActivity implements OnMapReady
         tiendaViewModel = new ViewModelProvider(this).get(TiendaViewModel.class);
         productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
         pedidoViewModel = new ViewModelProvider(this).get(PedidoViewModel.class);
+        //pedidoViewModel.enviarPendientes();
 
         // --- Location client ---
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -206,31 +209,11 @@ public class CrearPedidoActivity extends AppCompatActivity implements OnMapReady
         }
         pedidoPost.detalle = detallesPost;
 
-        // --- Verificar conexión ---
-        if (hayConexion()) {
-            pedidoViewModel.crearPedido(pedidoPost); // tu ViewModel debe manejar API y actualizar LiveData
-            pedidoViewModel.getCrearPedidoResult().observe(this, success -> {
-                if (success != null && success) {
-                    Toast.makeText(this, "Pedido creado exitosamente", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(this, "Error al crear pedido", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            // Guardar en SQLite como pendiente
-            Pedido pedidoOffline = new Pedido();
-            pedidoOffline.id_tienda = idTienda;
-            pedidoOffline.id_usuario = idUsuario;
-            pedidoOffline.latitud = ubicacionSeleccionada.latitude;
-            pedidoOffline.longitud = ubicacionSeleccionada.longitude;
-            pedidoOffline.fecha = pedidoPost.fecha;
-            pedidoOffline.pendiente = true;
+        // Solo una llamada, repository maneja offline/online
+        pedidoViewModel.guardarPedido(pedidoPost);
 
-            pedidoViewModel.insertarPedidoOffline(pedidoOffline, detallesAgregados);
-            Toast.makeText(this, "Sin conexión. Pedido guardado localmente", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        Toast.makeText(this, "Pedido guardado (offline si no hay internet)", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     // -------------------

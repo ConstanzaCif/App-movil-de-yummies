@@ -115,6 +115,27 @@ public class PedidoRepository {
     }
     public LiveData<List<Pedido>> obtenerPedidos(){return db.pedidoDao().obtenerPedidos();}
 
+    public void guardarPedido(PedidoPostDTO pedidoDTO) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            if (tieneInternet()) {
+                // Aquí intentar enviar al API
+                try {
+                    Response<PedidoDTO> response = apiService.crearPedido(pedidoDTO).execute();
+                    if (!response.isSuccessful()) {
+                        insertarPedidoOffline(pedidoDTO);
+                    }
+                } catch (Exception e) {
+                    insertarPedidoOffline(pedidoDTO);
+                }
+            } else {
+                // No hay internet → guardar en SQLite
+                insertarPedidoOffline(pedidoDTO);
+            }
+        });
+    }
+
+
+
     public LiveData<List<DetallePedido>> obtenerDetallesPorPedido(int idPedido) {
         return db.detallePedidoDao().obtenerDetallesPorPedido(idPedido);
     }
@@ -150,6 +171,7 @@ public class PedidoRepository {
         }
         return false;
     }
+
     public interface PedidoCallback {
         void onResult(boolean success);
     }
@@ -167,15 +189,70 @@ public class PedidoRepository {
             }
         });
     }
-    public void insertarPedidoOffline(Pedido pedido, List<DetallePedido> detalles) {
-        // Insertar pedido en la base de datos local
-        new Thread(() -> {
-            long idPedido = db.pedidoDao().insertarPedido(pedido); // usa db.pedidoDao()
-            for (DetallePedido d : detalles) {
-                d.id_pedido = (int) idPedido; // asignar FK
-                db.detallePedidoDao().insertarDetalle(d); // usa db.detallePedidoDao()
-            }
-        }).start();
+    private void insertarPedidoOffline(PedidoPostDTO pedidoDTO) {
+        Pedido pedido = new Pedido();
+        pedido.fecha = pedidoDTO.fecha;
+        pedido.id_tienda = pedidoDTO.tienda;
+        pedido.id_usuario = pedidoDTO.id_usuario;
+        pedido.latitud = pedidoDTO.latitud;
+        pedido.longitud = pedidoDTO.longitud;
+        pedido.pendiente = true;
+
+        long idPedido = db.pedidoDao().insertarPedido(pedido);
+
+        List<DetallePedido> detalles = new ArrayList<>();
+        for (PedidoPostDTO.Detalle d : pedidoDTO.detalle) {
+            DetallePedido detalle = new DetallePedido();
+            detalle.id_pedido = (int) idPedido;
+            detalle.id_producto = d.id_producto;
+            detalle.cantidad = d.cantidad;
+            detalles.add(detalle);
+        }
+
+        db.detallePedidoDao().insertarDetalles(detalles);
+        Log.d("PedidoRepository", "Pedido offline guardado con ID: " + idPedido);
     }
+
+    public void enviarPedidosPendientes() {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            if (!tieneInternet()) return;
+
+            List<Pedido> pendientes = db.pedidoDao().obtenerPedidosPendientesSync();
+            for (Pedido p : pendientes) {
+                PedidoPostDTO dto = mapearPedidoPostDTO(p);
+                try {
+                    Response<PedidoDTO> response = apiService.crearPedido(dto).execute();
+                    if (response.isSuccessful()) {
+                        // Marcar como enviado
+                        p.pendiente = false;
+                        db.pedidoDao().insertarPedido(p);
+                        Log.d("PedidoRepository", "Pedido pendiente enviado ID: " + p.id_pedido);
+                    }
+                } catch (Exception e) {
+                    Log.e("PedidoRepository", "Error enviando pedido pendiente ID: " + p.id_pedido);
+                }
+            }
+        });
+    }
+    private PedidoPostDTO mapearPedidoPostDTO(Pedido pedido) {
+        PedidoPostDTO dto = new PedidoPostDTO();
+        dto.id_usuario = pedido.id_usuario;
+        dto.tienda = pedido.id_tienda;
+        dto.fecha = pedido.fecha;
+        dto.latitud = pedido.latitud;
+        dto.longitud = pedido.longitud;
+
+        List<DetallePedido> detalles = db.detallePedidoDao().obtenerDetallesPorPedidoSync(pedido.id_pedido);
+        List<PedidoPostDTO.Detalle> listaDetalles = new ArrayList<>();
+        for (DetallePedido d : detalles) {
+            listaDetalles.add(new PedidoPostDTO.Detalle(d.id_producto, d.cantidad));
+        }
+        dto.detalle = listaDetalles;
+
+        return dto;
+    }
+
+
+
 
 }

@@ -39,7 +39,13 @@ public class PedidoViewModel extends AndroidViewModel {
     public void crearPedido(PedidoPostDTO pedido) {
         repository.crearPedido(pedido, success -> crearPedidoResult.postValue(success));
     }
+    public void guardarPedido(PedidoPostDTO pedido) {
+        repository.guardarPedido(pedido);
+    }
 
+    public void enviarPendientes() {
+        repository.enviarPedidosPendientes();
+    }
 
 
 }

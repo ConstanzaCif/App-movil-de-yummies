@@ -8,7 +8,7 @@ android {
     android.buildFeatures.buildConfig = true
 
     defaultConfig {
-        buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:3001/api/\"")
+        buildConfigField("String", "API_BASE_URL", "\"http://192.168.0.7:3001/api/\"")
         applicationId = "com.example.myapplication"
         minSdk = 24
         targetSdk = 36
@@ -50,5 +50,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
 }
