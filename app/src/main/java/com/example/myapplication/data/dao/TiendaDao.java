@@ -23,4 +23,7 @@ public interface TiendaDao {
     @Query("SELECT * FROM tiendas")
     LiveData<List<Tienda>> obtenerTiendas();
 
+    @Query("SELECT * FROM tiendas WHERE id_tiendas= :id")
+    LiveData<Tienda> obtenerTienda(int id);
+
 }

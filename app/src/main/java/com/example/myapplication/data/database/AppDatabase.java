@@ -6,17 +6,23 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.myapplication.data.dao.LineaProductoDao;
 import com.example.myapplication.data.dao.PedidoDao;
+import com.example.myapplication.data.dao.ProductoDao;
 import com.example.myapplication.data.dao.TiendaDao;
+import com.example.myapplication.data.entities.LineaProducto;
 import com.example.myapplication.data.entities.Pedido;
 import com.example.myapplication.data.entities.Producto;
 import com.example.myapplication.data.entities.Tienda;
 
-@Database(entities = {Tienda.class, Pedido.class}, version = 1, exportSchema = false)
+@Database(entities = {Tienda.class, Pedido.class, Producto.class, LineaProducto.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
 
     public abstract TiendaDao tiendaDao();
     public abstract PedidoDao pedidoDao();
+    public abstract ProductoDao productoDao();
+
+    public abstract LineaProductoDao lineaDao();
 
     private static volatile AppDatabase INSTANCE;
 

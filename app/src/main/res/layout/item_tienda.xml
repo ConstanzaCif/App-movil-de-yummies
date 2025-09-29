@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="#FFFFFF">
 
-    <TextView
-        android:id="@+id/txtTienda"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
-</LinearLayout>
+        android:padding="20dp">
+
+        <!-- Nombre de la Tienda -->
+        <TextView
+            android:id="@+id/txtNombreTienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supermercado Central"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#314090"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableLeft="@drawable/ic_store"
+            android:drawablePadding="6dp"/>/>
+
+        <!-- Código -->
+        <TextView
+            android:id="@+id/txtCodigoTienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código: 001"
+            android:textSize="16sp"
+            android:textColor="#CB262A"
+            android:fontFamily="sans-serif"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtNombreTienda"
+            android:drawableLeft="@drawable/ic_gr_code"
+            android:drawablePadding="6dp"/>
+
+        <!-- Dirección -->
+        <TextView
+            android:id="@+id/txtDireccionTienda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Dirección: Calle 12, Zona 3"
+            android:textSize="14sp"
+            android:textColor="#1976D2"
+            android:fontFamily="sans-serif"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtNombreTienda"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_location"
+            android:drawablePadding="6dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#809BD1F4"
+            app:layout_constraintTop_toBottomOf="@id/txtDireccionTienda"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
