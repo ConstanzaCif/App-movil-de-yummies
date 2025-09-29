@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         usuarioDTO = new UsuarioDTO();
 
         sessionManager = new SessionManager(this);
+
         viewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
 
 

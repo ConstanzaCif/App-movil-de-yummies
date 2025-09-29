@@ -68,7 +68,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if(id == R.id.nav_ver_tiendas) {
             startActivity(new Intent(this, TiendasActivity.class));
         }
-
+        else if (id == R.id.nav_pre_ventas) {
+            startActivity(new Intent(this, PedidosActivity.class));
+        }
 //        if (id == R.id.nav_mi_cuenta) {
 //            startActivity(new Intent(this, MiCuentaActivity.class));
 //        } else if (id == R.id.nav_pre_ventas) {
