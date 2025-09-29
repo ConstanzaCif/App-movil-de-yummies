@@ -27,4 +27,8 @@ public class TiendaViewModel extends AndroidViewModel {
     public void sincronizarTiendas(){
         repository.sincronizarTiendas();
     }
+
+    public LiveData<Tienda> getTienda(int id){
+        return repository.obtenerTienda(id);
+    }
 }
