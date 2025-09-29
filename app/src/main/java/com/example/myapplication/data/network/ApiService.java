@@ -5,6 +5,7 @@ import androidx.room.Insert;
 
 import com.example.myapplication.data.dto.LoginDto;
 import com.example.myapplication.data.dto.PedidoDTO;
+import com.example.myapplication.data.dto.PedidoPostDTO;
 import com.example.myapplication.data.dto.PedidoRequestDTO;
 import com.example.myapplication.data.dto.TiendaDTO;
 import com.example.myapplication.data.dto.UsuarioDTO;
@@ -31,4 +32,7 @@ public interface ApiService {
 
     @POST("pedidos")
     Call<PedidoDTO> obtenerPedidos(@Body PedidoRequestDTO pedidoRequestDTO);
+
+    @POST("pedidos/create")
+    Call<PedidoDTO> crearPedido(@Body PedidoPostDTO pedidoPostDTO);
 }

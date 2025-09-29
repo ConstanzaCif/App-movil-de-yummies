@@ -30,27 +30,28 @@ public class PedidosActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setupDrawer(R.layout.activity_pedidos);
-
+        sessionManager = new SessionManager(this);
+        Log.d("Usuario", "logueado "+sessionManager.getUsuario().getId_usuarios());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        int usuario = 2;
+        int usuario = sessionManager.getUsuario().getId_usuarios();
         lstViewPedidos = findViewById(R.id.listViewPedidos);
         PedidoAdapter pedidoAdapter = new PedidoAdapter(this, new ArrayList<>());
         lstViewPedidos.setAdapter(pedidoAdapter);
         pedidoViewModel = new ViewModelProvider(this).get(PedidoViewModel.class);
-
+    
         pedidoViewModel.getAllPedidos().observe(this, pedidos -> {
             pedidoAdapter.listaPedidos = pedidos;
             pedidoAdapter.notifyDataSetChanged();
         });
-        sessionManager = new SessionManager(this);
-
-        Log.d("Usuario", "logueado "+sessionManager.getUsuario().getId_usuarios());
         pedidoViewModel.sincronizarPedidos(usuario);
 
 
+
+
     }
+
 }

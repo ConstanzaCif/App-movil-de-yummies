@@ -5,11 +5,16 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import com.example.myapplication.data.dto.PedidoDTO;
+import com.example.myapplication.data.dto.PedidoPostDTO;
 import com.example.myapplication.data.entities.Pedido;
 import com.example.myapplication.data.repositories.PedidoRepository;
 
 import java.util.List;
+
+import retrofit2.Callback;
 
 public class PedidoViewModel extends AndroidViewModel {
     private PedidoRepository repository;
@@ -24,5 +29,8 @@ public class PedidoViewModel extends AndroidViewModel {
     public LiveData<List<Pedido>> sincronizarPedidos(int usuario)
     {
         return repository.sincronizarPedidos(usuario);
+    }
+    public void crearPedido(PedidoPostDTO pedido, Callback<PedidoDTO> callback) {
+        repository.crearPedido(pedido, callback);
     }
 }
