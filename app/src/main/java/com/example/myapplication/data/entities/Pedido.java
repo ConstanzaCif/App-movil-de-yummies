@@ -18,6 +18,33 @@ public class Pedido {
     public double total;
     public boolean pendiente;
 
+    public String nombre_tienda;
+    public String nombre_usuario;
+    public String apellido_usuario;
+
+    public String getNombre_tienda() {
+        return nombre_tienda;
+    }
+
+    public void setNombre_tienda(String nombre_tienda) {
+        this.nombre_tienda = nombre_tienda;
+    }
+
+    public String getNombre_usuario() {
+        return nombre_usuario;
+    }
+
+    public void setNombre_usuario(String nombre_usuario) {
+        this.nombre_usuario = nombre_usuario;
+    }
+
+    public String getApellido_usuario() {
+        return apellido_usuario;
+    }
+
+    public void setApellido_usuario(String apellido_usuario) {
+        this.apellido_usuario = apellido_usuario;
+    }
 
     public Integer getId_pedido() {
         return id_pedido;

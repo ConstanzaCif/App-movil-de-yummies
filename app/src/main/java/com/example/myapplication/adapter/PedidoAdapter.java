@@ -1,6 +1,7 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.myapplication.DetallesActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.data.entities.Pedido;
 
@@ -52,9 +54,16 @@ public class PedidoAdapter extends BaseAdapter {
 
         txtIdPedido.setText("Pedido #"+String.valueOf(pedidoItem.getId_pedido()));
         txtFechaPedido.setText("Fecha: " +String.valueOf(pedidoItem.getFecha()));
-        txtTiendaPedido.setText("Tienda: " +String.valueOf(pedidoItem.getId_tienda()));
-        txtUsuarioPedido.setText("Usuario: " +String.valueOf(pedidoItem.getId_usuario()));
+        txtTiendaPedido.setText("Tienda: " +String.valueOf(pedidoItem.getNombre_tienda()));
+        txtUsuarioPedido.setText("Usuario: " +String.valueOf(pedidoItem.getNombre_usuario()));
         txtTotalPedido.setText("Total: Q" +String.valueOf(pedidoItem.getTotal()));
+
+        convertView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetallesActivity.class);
+            intent.putExtra("ID_PEDIDO", pedidoItem.getId_pedido());
+
+            context.startActivity(intent);
+        });
 
 
         return convertView;
