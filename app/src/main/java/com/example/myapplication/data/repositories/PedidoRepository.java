@@ -150,5 +150,32 @@ public class PedidoRepository {
         }
         return false;
     }
+    public interface PedidoCallback {
+        void onResult(boolean success);
+    }
+
+    public void crearPedido(PedidoPostDTO pedido, PedidoCallback callback) {
+        apiService.crearPedido(pedido).enqueue(new Callback<PedidoDTO>() {
+            @Override
+            public void onResponse(Call<PedidoDTO> call, Response<PedidoDTO> response) {
+                callback.onResult(response.isSuccessful() && response.body() != null);
+            }
+
+            @Override
+            public void onFailure(Call<PedidoDTO> call, Throwable t) {
+                callback.onResult(false);
+            }
+        });
+    }
+    public void insertarPedidoOffline(Pedido pedido, List<DetallePedido> detalles) {
+        // Insertar pedido en la base de datos local
+        new Thread(() -> {
+            long idPedido = db.pedidoDao().insertarPedido(pedido); // usa db.pedidoDao()
+            for (DetallePedido d : detalles) {
+                d.id_pedido = (int) idPedido; // asignar FK
+                db.detallePedidoDao().insertarDetalle(d); // usa db.detallePedidoDao()
+            }
+        }).start();
+    }
 
 }

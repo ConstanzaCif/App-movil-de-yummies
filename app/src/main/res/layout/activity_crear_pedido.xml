@@ -1,47 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:fillViewport="true">
 
-    <Spinner
-        android:id="@+id/spinnerTienda"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:minHeight="48dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerProducto"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:minHeight="48dp"/>
-
-    <EditText
-        android:id="@+id/inputCantidad"
-        android:hint="Cantidad"
-        android:inputType="number"
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnAgregarDetalle"
-        android:text="Agregar Detalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!-- Spinner Tienda -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona Tienda"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"/>
+        <Spinner
+            android:id="@+id/spinnerTienda"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"/>
 
-    <ListView
-        android:id="@+id/listViewDetalles"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        <!-- Spinner Producto -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona Producto"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"/>
+        <Spinner
+            android:id="@+id/spinnerProducto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"/>
 
-    <Button
-        android:id="@+id/btnGuardarPedido"
-        android:text="Guardar Pedido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!-- Input cantidad -->
+        <EditText
+            android:id="@+id/inputCantidad"
+            android:hint="Cantidad"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"/>
 
-</LinearLayout>
+        <!-- Botón agregar detalle -->
+        <Button
+            android:id="@+id/btnAgregarDetalle"
+            android:text="Agregar Detalle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Lista de detalles -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalles agregados"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"/>
+        <ListView
+            android:id="@+id/listViewDetalles"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"/>
+
+        <!-- Mapa -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicación del pedido"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"/>
+        <FrameLayout
+            android:id="@+id/mapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/darker_gray"/>
+
+        <!-- Botón guardar -->
+        <Button
+            android:id="@+id/btnGuardarPedido"
+            android:text="Guardar Pedido"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+</ScrollView>
