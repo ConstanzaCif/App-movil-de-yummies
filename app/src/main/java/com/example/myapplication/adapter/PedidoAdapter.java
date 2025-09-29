@@ -1,6 +1,7 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +50,12 @@ public class PedidoAdapter extends BaseAdapter {
 
         Pedido pedidoItem = listaPedidos.get(position);
 
-        txtIdPedido.setText(String.valueOf(pedidoItem.getId_pedido()));
-        txtFechaPedido.setText(String.valueOf(pedidoItem.getFecha()));
-        txtTiendaPedido.setText(String.valueOf(pedidoItem.getId_tienda()));
-        txtUsuarioPedido.setText(String.valueOf(pedidoItem.getId_usuario()));
-        txtTotalPedido.setText(String.valueOf(pedidoItem.getTotal()));
+        txtIdPedido.setText("Pedido #"+String.valueOf(pedidoItem.getId_pedido()));
+        txtFechaPedido.setText("Fecha: " +String.valueOf(pedidoItem.getFecha()));
+        txtTiendaPedido.setText("Tienda: " +String.valueOf(pedidoItem.getId_tienda()));
+        txtUsuarioPedido.setText("Usuario: " +String.valueOf(pedidoItem.getId_usuario()));
+        txtTotalPedido.setText("Total: Q" +String.valueOf(pedidoItem.getTotal()));
+
 
         return convertView;
     }
