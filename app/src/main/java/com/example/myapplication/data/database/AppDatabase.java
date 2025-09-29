@@ -12,7 +12,7 @@ import com.example.myapplication.data.entities.Pedido;
 import com.example.myapplication.data.entities.Producto;
 import com.example.myapplication.data.entities.Tienda;
 
-@Database(entities = {Tienda.class, Pedido.class}, version = 1, exportSchema = false)
+@Database(entities = {Tienda.class, Pedido.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
 
     public abstract TiendaDao tiendaDao();

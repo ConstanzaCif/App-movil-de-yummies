@@ -42,11 +42,15 @@ public class TiendaAdapter extends BaseAdapter {
         if(convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_tienda, parent, false);
         }
-        TextView txtTienda = convertView.findViewById(R.id.txtTienda);
+        TextView txtTienda = convertView.findViewById(R.id.txtNombreTienda);
+        TextView txtCodigo = convertView.findViewById(R.id.txtCodigoTienda);
+        TextView txtDireccion = convertView.findViewById(R.id.txtDireccionTienda);
 
         Tienda tiendaItem = listaTiendas.get(position);
 
         txtTienda.setText(tiendaItem.getNombre_tienda());
+        txtCodigo.setText("Código: "+tiendaItem.getId_tiendas());
+        txtDireccion.setText("Dirección: "+tiendaItem.getDireccion());
 
         return convertView;
     }

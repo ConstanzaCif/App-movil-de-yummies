@@ -68,4 +68,7 @@
             return db.tiendaDao().obtenerTiendas();
         }
 
+        public LiveData<Tienda> obtenerTienda(int id) {
+            return  db.tiendaDao().obtenerTienda(id);
+        }
     }
