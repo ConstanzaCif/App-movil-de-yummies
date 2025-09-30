@@ -20,4 +20,9 @@ public interface PedidoDao {
 
     @Query("SELECT * FROM pedidos")
     LiveData<List<Pedido>> obtenerPedidos();
+
+    @Query("SELECT * FROM pedidos WHERE pendiente = 1")
+    List<Pedido> obtenerPedidosPendientesSync();
+
+
 }
