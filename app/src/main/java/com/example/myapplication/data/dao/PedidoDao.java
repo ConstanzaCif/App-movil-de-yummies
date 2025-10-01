@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface PedidoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertarPedido(Pedido pedido);
+    long insertarPedido(Pedido pedido);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertarPedidos(List<Pedido> pedidos);
