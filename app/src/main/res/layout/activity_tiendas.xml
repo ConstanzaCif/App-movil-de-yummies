@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TiendasActivity"
-    android:background="#FFFCF1">
+    android:background="#FFFFFF">
 
     <!-- Título estilizado -->
     <TextView
@@ -23,7 +23,7 @@
         android:shadowDy="2"
         android:shadowRadius="4"
         android:gravity="center"
-        android:background="@drawable/title_background"
+        android:background="@drawable/header_gradient"
         android:paddingHorizontal="24dp"
         android:paddingVertical="12dp"
         app:layout_constraintTop_toTopOf="parent"

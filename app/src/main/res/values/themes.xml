@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/white</item>  <!-- O @color/white, o transparent para default -->
+        <item name="android:windowTranslucentStatus">false</item>  <!-- Desactiva translucidez si no la quieres -->
+    </style>
 </resources>

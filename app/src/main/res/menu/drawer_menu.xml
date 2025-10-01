@@ -1,18 +1,36 @@
-    <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item
-            android:id="@+id/nav_mi_cuenta"
-            android:icon="@drawable/ic_account"
-            android:title="Mi Cuenta"/>
-        <item
-            android:id="@+id/nav_pre_ventas"
-            android:icon="@drawable/ic_sales"
-            android:title="Pre Ventas"/>
-        <item
-            android:id="@+id/nav_ver_tiendas"
-            android:icon="@drawable/ic_store"
-            android:title="Ver Tiendas"/>
-        <item
-            android:id="@+id/nav_ver_productos"
-            android:icon="@drawable/ic_products"
-            android:title="Ver Productos"/>
-    </menu>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Cuenta">
+        <menu>
+            <item
+                android:id="@+id/nav_mi_cuenta"
+                android:icon="@drawable/ic_person"
+                android:title="Mi Cuenta"/>
+        </menu>
+    </item>
+
+    <item android:title="Ventas">
+        <menu>
+            <item
+                android:id="@+id/nav_pre_ventas"
+                android:icon="@drawable/ic_order"
+                android:title="Pedidos"/>
+            <item
+                android:id="@+id/nav_pedidos"
+                android:icon="@drawable/ic_add_order"
+            android:title="Agregar pedido"/>
+        </menu>
+    </item>
+
+    <item android:title="Catálogo">
+        <menu>
+            <item
+                android:id="@+id/nav_ver_tiendas"
+                android:icon="@drawable/ic_store"
+                android:title="Ver Tiendas"/>
+            <item
+                android:id="@+id/nav_ver_productos"
+                android:icon="@drawable/ic_product"
+                android:title="Ver Productos"/>
+        </menu>
+    </item>
+</menu>

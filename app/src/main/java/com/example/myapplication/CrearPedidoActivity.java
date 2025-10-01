@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,7 +46,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class CrearPedidoActivity extends BaseActivity implements OnMapReadyCallback {
+public class CrearPedidoActivity extends BaseActivity  {
 
     private Spinner spinnerTienda, spinnerProducto;
     private EditText inputCantidad;
@@ -74,6 +75,9 @@ public class CrearPedidoActivity extends BaseActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setupDrawer(R.layout.activity_crear_pedido);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+        }
 
 
         // --- Inicializar views ---
@@ -219,33 +223,7 @@ public class CrearPedidoActivity extends BaseActivity implements OnMapReadyCallb
     // -------------------
     // MAPA
     // -------------------
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        // Ubicación por defecto
-        LatLng defaultLocation = new LatLng(12.77, -91.12);
-        ubicacionSeleccionada = defaultLocation;
-
-        Marker marker = mMap.addMarker(new MarkerOptions()
-                .position(defaultLocation)
-                .draggable(true)
-                .title("Arrastra para seleccionar ubicación"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 15));
-
-        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override public void onMarkerDragStart(Marker marker) {}
-            @Override public void onMarkerDrag(Marker marker) {}
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                ubicacionSeleccionada = marker.getPosition();
-            }
-        });
-
-        // Obtener ubicación actual si hay permiso
-        obtenerUbicacionActual();
-    }
 
     private void solicitarPermisoUbicacion() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

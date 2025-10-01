@@ -4,4 +4,8 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/white</item>  <!-- O @color/white, o transparent para default -->
+        <item name="android:windowTranslucentStatus">false</item>  <!-- Desactiva translucidez si no la quieres -->
+    </style>
 </resources>

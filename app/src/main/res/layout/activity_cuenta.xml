@@ -12,18 +12,25 @@
     <!-- Título -->
     <TextView
         android:id="@+id/txtUsuario2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mi cuenta"
-        android:textSize="28sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-black"
+        android:shadowColor="#80000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
         android:gravity="center"
-        android:background="@drawable/title_background"
+        android:background="@drawable/header_gradient"
+        android:paddingHorizontal="24dp"
         android:paddingVertical="12dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <!-- Avatar del usuario -->
     <ImageView
@@ -31,7 +38,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/ic_account"
+        android:src="@drawable/ic_person"
         android:scaleType="centerCrop"
         android:contentDescription="Avatar"
         app:layout_constraintTop_toBottomOf="@id/txtUsuario2"
@@ -71,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="Cerrar sesión"
         android:textAllCaps="false"
-        android:backgroundTint="#314090"
+        android:backgroundTint="#1976D2"
         android:textColor="#FFFFFF"
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="32dp"

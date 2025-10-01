@@ -30,7 +30,7 @@
             android:drawableLeft="@drawable/ic_store"
             android:drawablePadding="6dp"/>/>
 
-        <!-- Código -->
+
         <TextView
             android:id="@+id/txtCodigoTienda"
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@id/txtNombreTienda"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
-            android:drawableLeft="@drawable/ic_location"
+            android:drawableLeft="@drawable/ic_locacion"
             android:drawablePadding="6dp"/>
 
         <!-- Divider -->

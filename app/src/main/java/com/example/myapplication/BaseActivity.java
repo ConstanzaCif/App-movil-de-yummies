@@ -27,6 +27,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -48,6 +49,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.toolBar), (v, insets) -> {
+            int statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+            v.setPadding(0, statusBarHeight, 0, 0);
+            return insets;
+        });
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -77,6 +86,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         else if(id == R.id.nav_mi_cuenta){
             startActivity(new Intent(this, CuentaActivity.class));
         }
+        else if(id == R.id.nav_pedidos){
+            startActivity(new Intent(this, CrearPedidoActivity.class));
+        }
+
+
 //        if (id == R.id.nav_mi_cuenta) {
 //            startActivity(new Intent(this, MiCuentaActivity.class));
 //        } else if (id == R.id.nav_pre_ventas) {
