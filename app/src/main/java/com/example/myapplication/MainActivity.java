@@ -21,6 +21,7 @@ import com.example.myapplication.data.clases.Usuario;
 import com.example.myapplication.data.dto.UsuarioDTO;
 import com.example.myapplication.data.repositories.UsuarioRepository;
 import com.example.myapplication.data.viewmodel.PedidoViewModel;
+import com.example.myapplication.data.viewmodel.ProductoViewModel;
 import com.example.myapplication.data.viewmodel.TiendaViewModel;
 import com.example.myapplication.data.viewmodel.UsuarioViewModel;
 
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     UsuarioViewModel viewModel;
     UsuarioDTO usuarioDTO;
 
-
+    TiendaViewModel tiendaViewModel;
+    ProductoViewModel productoViewModel;
 
 
     @Override
@@ -59,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
         viewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
-
+        tiendaViewModel = new ViewModelProvider(this).get(TiendaViewModel.class);
+        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
 
 
         Log.d("TEST", "MainActivity iniciado");

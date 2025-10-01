@@ -7,5 +7,6 @@
     <color name="yummies_blue">#1976D2</color>
     <color name="yummies_light_blue">#42A5F5</color>
     <color name="yummies_white">#FFFFFF</color>
-    <color name="yummies_divider">#FFCDD2</color>
+    <color name="yummies_divider">#FFFFFF</color>
+    <color name="colorPrimary">#1976D2</color>
 </resources>

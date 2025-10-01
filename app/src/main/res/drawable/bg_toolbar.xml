@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Degradado elegante azul oscuro a azul medio -->
+    <gradient
+        android:startColor="#0D47A1"
+        android:endColor="#1976D2"
+        android:angle="0" />
+
+    <!-- Bordes suavizados -->
+    <corners android:radius="16dp" />
+
+    <!-- Borde fino blanco para contraste -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF"/>
+</shape>
