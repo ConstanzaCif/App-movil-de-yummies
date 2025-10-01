@@ -45,7 +45,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class CrearPedidoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class CrearPedidoActivity extends BaseActivity implements OnMapReadyCallback {
 
     private Spinner spinnerTienda, spinnerProducto;
     private EditText inputCantidad;
@@ -72,7 +72,7 @@ public class CrearPedidoActivity extends AppCompatActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_pedido);
+        setupDrawer(R.layout.activity_crear_pedido);
 
 
 
