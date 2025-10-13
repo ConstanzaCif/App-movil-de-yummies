@@ -12,26 +12,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Título grande estilo pedidos -->
+        <!-- 🟥 Encabezado -->
         <TextView
             android:id="@+id/txtSectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="REGISTRAR PEDIDO"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:background="@drawable/header_gradient"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"/>
+            android:paddingVertical="12dp"/>
 
+        <!-- 🟦 Contenedor principal -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cardCornerRadius="24dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
             app:cardBackgroundColor="#FFFFFF">
@@ -39,10 +40,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true">
-                android:padding="24dp">
+                android:padding="20dp">
 
-                <!-- Tienda -->
+                <!-- 🏬 Tienda -->
                 <TextView
                     android:id="@+id/labelTienda"
                     android:layout_width="0dp"
@@ -60,12 +60,12 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:backgroundTint="#D32F2F"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@id/labelTienda"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- Producto -->
+                <!-- 🛒 Producto -->
                 <TextView
                     android:id="@+id/labelProducto"
                     android:layout_width="0dp"
@@ -74,51 +74,78 @@
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#1976D2"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@id/spinnerTienda"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <Spinner
                     android:id="@+id/spinnerProducto"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:backgroundTint="#1976D2"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@id/labelProducto"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- Cantidad -->
+                <!-- 🔢 Cantidad -->
                 <EditText
                     android:id="@+id/inputCantidad"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
                     android:hint="Cantidad"
                     android:inputType="number"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
                     android:padding="8dp"
                     android:backgroundTint="#D32F2F"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@id/spinnerProducto"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- Botón agregar detalle -->
+                <!-- ➕ Botón agregar -->
                 <Button
                     android:id="@+id/btnAgregarDetalle"
-                    android:text="Agregar Detalle"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#1976D2"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
+                    android:text="Agregar Detalle"
+                    android:textColor="#FFFFFF"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:backgroundTint="#1976D2"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@id/inputCantidad"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- Lista de detalles -->
+                <!-- 📷 Botón tomar foto -->
+                <Button
+                    android:id="@+id/btnTomarFoto"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="Tomar Foto"
+                    android:textColor="#FFFFFF"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:backgroundTint="#388E3C"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/btnAgregarDetalle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <!-- 🖼️ Imagen previa -->
+                <ImageView
+                    android:id="@+id/imagePreview"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerCrop"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@id/btnTomarFoto"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <!-- 📋 Lista de detalles -->
                 <TextView
                     android:id="@+id/labelDetalles"
                     android:layout_width="0dp"
@@ -127,10 +154,10 @@
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#1976D2"
-                    app:layout_constraintTop_toBottomOf="@id/btnAgregarDetalle"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/imagePreview"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <ListView
                     android:id="@+id/listViewDetalles"
@@ -138,26 +165,26 @@
                     android:layout_height="200dp"
                     android:divider="@android:color/darker_gray"
                     android:dividerHeight="1dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@id/labelDetalles"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- Botón guardar -->
+                <!-- 💾 Botón guardar -->
                 <Button
                     android:id="@+id/btnGuardarPedido"
-                    android:text="Guardar Pedido"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#D32F2F"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
+                    android:text="Guardar Pedido"
+                    android:textColor="#FFFFFF"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:backgroundTint="#D32F2F"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
                     app:layout_constraintTop_toBottomOf="@id/listViewDetalles"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

@@ -7,6 +7,7 @@ public class PedidoPostDTO {
     public int tienda;
     public double latitud;
     public double longitud;
+    public String imagen;
     public int id_usuario;
     public List<Detalle> detalle;
 
