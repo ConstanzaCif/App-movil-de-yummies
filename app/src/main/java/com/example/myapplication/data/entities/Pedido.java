@@ -18,6 +18,8 @@ public class Pedido {
     public double total;
     public boolean pendiente;
 
+    public String imagen;
+
     public String nombre_tienda;
     public String nombre_usuario;
     public String apellido_usuario;
@@ -108,5 +110,13 @@ public class Pedido {
 
     public void setPendiente(boolean pendiente) {
         this.pendiente = pendiente;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

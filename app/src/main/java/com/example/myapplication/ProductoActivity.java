@@ -63,7 +63,7 @@ public class ProductoActivity extends BaseActivity {
                 String imageUrl = productoConLinea.getProducto().getImagen_url();
                 if (imageUrl != null && !imageUrl.isEmpty()) {
                     if (!imageUrl.startsWith("http")) {
-                        imageUrl = "http://10.0.2.2:3001" + imageUrl;
+                        imageUrl = "http://172.17.73.38:3001" + imageUrl;
                     }
                     Glide.with(this)
                             .load(imageUrl)

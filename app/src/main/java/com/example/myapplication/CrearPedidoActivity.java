@@ -2,20 +2,26 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -40,6 +46,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +54,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class CrearPedidoActivity extends BaseActivity  {
+
+    private static final int REQUEST_CAMERA_PERMISSION = 100;
+    private static final int REQUEST_IMAGE_CAPTURE = 101;
+    private ImageView imagePreview;
+    private Bitmap imagenBitmap;
 
     private Spinner spinnerTienda, spinnerProducto;
     private EditText inputCantidad;
@@ -70,6 +82,8 @@ public class CrearPedidoActivity extends BaseActivity  {
 
     private ActivityResultLauncher<String> locationPermissionLauncher;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +93,10 @@ public class CrearPedidoActivity extends BaseActivity  {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
 
+        imagePreview = findViewById(R.id.imagePreview);
+        Button btnTomarFoto = findViewById(R.id.btnTomarFoto);
+
+        btnTomarFoto.setOnClickListener(v -> abrirCamara());
 
         // --- Inicializar views ---
         spinnerTienda = findViewById(R.id.spinnerTienda);
@@ -128,6 +146,18 @@ public class CrearPedidoActivity extends BaseActivity  {
 
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imagenBitmap = (Bitmap) extras.get("data");
+            imagePreview.setImageBitmap(imagenBitmap);
+        }
+    }
+
     // -------------------
     // CARGAR TIENDAS
     // -------------------
@@ -164,6 +194,32 @@ public class CrearPedidoActivity extends BaseActivity  {
         });
     }
 
+    private void abrirCamara() {
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+        } else {
+            lanzarIntentCamara();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                lanzarIntentCamara();
+            } else {
+                Toast.makeText(this, "Se necesita permiso de cámara para tomar fotos", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    private void lanzarIntentCamara() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+    }
+
     // -------------------
     // AGREGAR DETALLE
     // -------------------
@@ -189,6 +245,16 @@ public class CrearPedidoActivity extends BaseActivity  {
     }
 
     // -------------------
+// CONVERTIR IMAGEN A BASE64
+// -------------------
+    private String convertirImagenABase64(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return android.util.Base64.encodeToString(imageBytes, android.util.Base64.NO_WRAP);
+    }
+
+    // -------------------
     // GUARDAR PEDIDO
     // -------------------
     private void guardarPedido() {
@@ -200,12 +266,25 @@ public class CrearPedidoActivity extends BaseActivity  {
         int idTienda = tiendas.get(spinnerTienda.getSelectedItemPosition()).id_tiendas;
         int idUsuario = sessionManager.getUsuario().getId_usuarios();
 
+
+
+
+
         PedidoPostDTO pedidoPost = new PedidoPostDTO();
         pedidoPost.tienda = idTienda;
         pedidoPost.id_usuario = idUsuario;
         pedidoPost.latitud = ubicacionSeleccionada.latitude;
         pedidoPost.longitud = ubicacionSeleccionada.longitude;
         pedidoPost.fecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).format(new Date());
+
+
+        String imagenBase64 = null;
+        if (imagenBitmap != null) {
+            imagenBase64 = convertirImagenABase64(imagenBitmap);
+        }
+        pedidoPost.imagen = imagenBase64;
+
+
 
         List<PedidoPostDTO.Detalle> detallesPost = new ArrayList<>();
         for (DetallePedido d : detallesAgregados) {

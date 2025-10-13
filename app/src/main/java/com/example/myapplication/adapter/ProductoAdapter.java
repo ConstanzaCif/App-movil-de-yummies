@@ -61,7 +61,7 @@ public class ProductoAdapter extends BaseAdapter {
         Log.d("Imagen", "Imagen en la bd "+imageUrl);
         if (imageUrl != null && !imageUrl.isEmpty()) {
             if (!imageUrl.startsWith("http")) {
-                imageUrl = "http://10.0.2.2:3001" + imageUrl;
+                imageUrl = "http://172.17.73.38:3001" + imageUrl;
                 Log.d("Imagen", "Imagen en la bd "+imageUrl);
             }
             Glide.with(context)

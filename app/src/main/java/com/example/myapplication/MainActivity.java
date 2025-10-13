@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
         tiendaViewModel = new ViewModelProvider(this).get(TiendaViewModel.class);
-        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+            
 
 
         Log.d("TEST", "MainActivity iniciado");
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     if (user != null)
                     {
                         Toast.makeText(MainActivity.this, "Bienvenido " +user.getNombre(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, InicioActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ProductosActivity.class);
                         startActivity(intent);
                         Log.d("Login", "El usuario ha iniciado sesion: " +sessionManager.getUsuario().getUsename());
                     }

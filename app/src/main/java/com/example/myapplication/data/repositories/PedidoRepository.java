@@ -1,9 +1,11 @@
 package com.example.myapplication.data.repositories;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.os.Build;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -19,6 +21,7 @@ import com.example.myapplication.data.entities.Tienda;
 import com.example.myapplication.data.network.ApiClient;
 import com.example.myapplication.data.network.ApiService;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -113,6 +116,7 @@ public class PedidoRepository {
         }
         return lista;
     }
+
     public LiveData<List<Pedido>> obtenerPedidos(){return db.pedidoDao().obtenerPedidos();}
 
     public void guardarPedido(PedidoPostDTO pedidoDTO) {
@@ -197,6 +201,7 @@ public class PedidoRepository {
         pedido.latitud = pedidoDTO.latitud;
         pedido.longitud = pedidoDTO.longitud;
         pedido.pendiente = true;
+        pedido.imagen = pedidoDTO.imagen;
 
         long idPedido = db.pedidoDao().insertarPedido(pedido);
 
@@ -241,6 +246,7 @@ public class PedidoRepository {
         dto.fecha = pedido.fecha;
         dto.latitud = pedido.latitud;
         dto.longitud = pedido.longitud;
+        dto.imagen = pedido.imagen;
 
         List<DetallePedido> detalles = db.detallePedidoDao().obtenerDetallesPorPedidoSync(pedido.id_pedido);
         List<PedidoPostDTO.Detalle> listaDetalles = new ArrayList<>();

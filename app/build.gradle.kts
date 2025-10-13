@@ -8,7 +8,7 @@ android {
     android.buildFeatures.buildConfig = true
 
     defaultConfig {
-        buildConfigField("String", "API_BASE_URL", "\"http://192.168.0.2:3001/api/\"")
+        buildConfigField("String", "API_BASE_URL", "\"http://192.168.0.5:3001/api/\"")
         applicationId = "com.example.myapplication"
         minSdk = 24
         targetSdk = 36
